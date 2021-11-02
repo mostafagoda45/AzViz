@@ -265,10 +265,11 @@ function Export-AzViz {
 
         #region graph-generation
         Write-CustomHost "Starting to generate Azure visualization..." -Indentation 0 -color Magenta -AddTime
-    
-        $graph = ConvertTo-DOTLanguage -TargetType $TargetType -Targets $Targets -CategoryDepth $CategoryDepth -LabelVerbosity $LabelVerbosity -Splines $Splines -ExcludeTypes $ExcludeTypes
+
+        $graph = ConvertTo-DOTLanguage -TargetType $TargetType -Targets $Targets -CategoryDepth $CategoryDepth -LabelVerbosity $LabelVerbosity -Splines $Splines -ExcludeTypes $ExcludeTypes -Direction $Direction
 
         if ($graph) {
+            #$graph | Out-File -FilePath 'C:\Users\mostafa.goda\Desktop\RMA.dot'
             @"
 strict $graph
 "@ | Export-PSGraph -ShowGraph:$Show -OutputFormat $OutputFormat -DestinationPath $OutputFilePath -OutVariable output |
